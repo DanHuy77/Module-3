@@ -1,5 +1,5 @@
-create database if not exists code_gym;
-use code_gym;
+create database if not exists student_management;
+use student_management;
 create table teacher (
 id int primary key,
 `name` varchar(30),
