@@ -57,3 +57,20 @@ gia DOUBLE,
 don_vi VARCHAR(10),
 trang_thai VARCHAR(45)
 );
+--- Tạo bảng hợp đồng ---
+CREATE TABLE hop_dong(
+ma_hop_dong INT PRIMARY KEY AUTO_INCREMENT,
+ngay_lam_hop_dong DATETIME,
+ngay_ket_thuc DATETIME,
+tien_dat_coc DOUBLE,
+FOREIGN KEY(ma_nhan_vien) REFERENCES nhan_vien(ma_nhan_vien),
+FOREIGN KEY(ma_khach_hang) REFERENCES khach_hang(ma_khach_hang),
+FOREIGN KEY(ma_dich_vu) REFERENCES dich_vu(ma_dich_vu)
+);
+--- Tạo bảng hợp đồng chi tiết ---
+CREATE TABLE hop_dong_chi_tiet (
+ma_hop_dong_chi_tiet INT PRIMARY KEY AUTO_INCREMENT,
+FOREIGN KEY (ma_hop_dong) REFERENCES hop_dong(ma_hop_dong),
+FOREIGN KEY(ma_dich_vu_di_kem) REFERENCES dich_vu_di_kem,
+so_luong INT
+)
