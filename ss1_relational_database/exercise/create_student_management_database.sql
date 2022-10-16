@@ -1,12 +1,12 @@
-create database if not exists CodeGym;
-use CodeGym;
-create table Teacher (
+create database if not exists code_gym;
+use code_gym;
+create table teacher (
 id int primary key,
 `name` varchar(30),
 age int,
 country varchar(30)
 );
-create table Class (
+create table class (
 id int primary key,
 `name` varchar(30)
 );
