@@ -45,15 +45,16 @@ ten_dich_vu VARCHAR(45),
 dien_tich INT,
 chi_phi_thue DOUBLE,
 so_nguoi_toi_da int,
-ma_kieu_thue int,
-ma_loai_dich_vu int,
-FOREIGN KEY(ma_kieu_thue) REFERENCES kieu_thue(ma_kieu_thue),
-FOREIGN KEY(ma_loai_dich_vu) REFERENCES loai_dich_vu(ma_loai_dich_vu),
+
 tieu_chuan_phong VARCHAR(45) DEFAULT("Phòng thường"),
 mo_ta_tien_nghi_khac VARCHAR(45),
 dien_tich_ho_boi DOUBLE,
 so_tang int,
-dich_vu_mien_phi_di_kem TEXT
+dich_vu_mien_phi_di_kem TEXT,
+ma_kieu_thue int,
+ma_loai_dich_vu int,
+FOREIGN KEY(ma_kieu_thue) REFERENCES kieu_thue(ma_kieu_thue),
+FOREIGN KEY(ma_loai_dich_vu) REFERENCES loai_dich_vu(ma_loai_dich_vu)
 );
 ----------------------------------------------------------------
 CREATE TABLE dich_vu_di_kem(
