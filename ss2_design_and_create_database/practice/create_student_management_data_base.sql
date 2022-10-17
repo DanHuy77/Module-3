@@ -1,0 +1,37 @@
+CREATE DATABASE IF NOT EXISTS quan_ly_sinh_vien;
+USE quan_ly_sinh_vien;
+--- TẠO BẢNG CLASS ---
+CREATE TABLE class(
+class_ID INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+class_name VARCHAR(60) NOT NULL,
+start_date DATETIME NOT NULL,
+status BIT
+);
+--- TẠO BẢNG STUDENT ---
+CREATE TABLE student(
+student_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+student_name VARCHAR(30) NOT NULL,
+address VARCHAR(50),
+phone VARCHAR(20),
+status BIT,
+class_ID INT NOT NULL,
+FOREIGN KEY (class_ID) REFERENCES class(class_ID)
+);
+--- TẠO BẢNG `SUBJECT` ---
+CREATE TABLE `subject`(
+sub_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+sub_name VARCHAR(30) NOT NULL,
+credit TINYINT NOT NULL DEFAULT(1) CHECK(credit >=1),
+status BIT DEFAULT(1)
+);
+--- TẠO BẢNG MARK ---
+CREATE TABLE mark(
+mark_ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+sub_ID INT NOT NULL UNIQUE KEY,
+student_ID INT NOT NULL UNIQUE KEY,
+mark FLOAT DEFAULT (0) CHECK(mark BETWEEN 0 AND 100),
+exam_times TINYINT DEFAULT(1),
+FOREIGN KEY (sub_ID) REFERENCES `subject`(sub_ID),
+FOREIGN KEY (student_ID) REFERENCES student (student_ID)
+);
+
