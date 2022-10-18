@@ -25,15 +25,15 @@ create table loai_khach( ma_loai_khach int primary key auto_increment, ten_loai_
 --- Tạo bảng khách hàng ---
 CREATE TABLE khach_hang(
 ma_khach_hang INT PRIMARY KEY AUTO_INCREMENT,
-ma_loai_khach INT,
-FOREIGN KEY (ma_loai_khach) REFERENCES loai_khach(ma_loai_khach),
 ho_ten VARCHAR(45),
 ngay_sinh DATE,
 gioi_tinh BIT(1),
 so_cmnd VARCHAR(45),
 so_dien_thoai VARCHAR(45),
 email VARCHAR(45),
-dia_chi VARCHAR (45)
+dia_chi VARCHAR (45),
+ma_loai_khach INT,
+FOREIGN KEY (ma_loai_khach) REFERENCES loai_khach(ma_loai_khach)
 );
 ---------------------------------------------------------------
 CREATE TABLE loai_dich_vu (ma_loai_dich_vu INT PRIMARY KEY AUTO_INCREMENT, ten_loai_dich_vu VARCHAR (45));
@@ -45,7 +45,6 @@ ten_dich_vu VARCHAR(45),
 dien_tich INT,
 chi_phi_thue DOUBLE,
 so_nguoi_toi_da int,
-
 tieu_chuan_phong VARCHAR(45) DEFAULT("Phòng thường"),
 mo_ta_tien_nghi_khac VARCHAR(45),
 dien_tich_ho_boi DOUBLE,
