@@ -9,4 +9,11 @@ SELECT * FROM customer JOIN `order` ON customer.c_ID = `order`.c_ID JOIN order_d
 SELECT c_name FROM customer WHERE NOT EXISTS (SELECT * FROM `order` WHERE customer.c_id = `order`.c_id);
 
 --- Hiển thị mã hóa đơn, ngày bán và giá tiền của từng hóa đơn (giá một hóa đơn được tính bằng tổng giá bán của từng loại mặt hàng xuất hiện trong hóa đơn. Giá bán của từng loại được tính = odQTY*pPrice) ---
-SELECT `order`.o_ID, o_date, od_QTY*p_price FROM `order` JOIN order_detail ON `order`.o_ID = order_detail.o_ID JOIN product ON order_detail.p_ID = product.p_ID;
+SELECT 
+    `order`.o_ID, o_date, od_QTY * p_price
+FROM
+    `order`
+        JOIN
+    order_detail ON `order`.o_ID = order_detail.o_ID
+        JOIN
+    product ON order_detail.p_ID = product.p_ID;

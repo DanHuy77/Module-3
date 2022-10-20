@@ -1,6 +1,20 @@
 USE furama_resort;
+
+--- 2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự. ---
+SELECT * FROM nhan_vien WHERE ho_ten REGEXP('^[HTK]') AND (char_length(ho_ten) < 16);
+
+--- Task 3 ---
+
+USE furama_resort;
+SELECT * FROM 
+khach_hang 
+WHERE TIMESTAMPDIFF(YEAR,ngay_sinh,NOW()) >18 AND 
+TIMESTAMPDIFF(YEAR,ngay_sinh,NOW()) <50 AND dia_chi REGEXP('(Quảng trị|Đà Nẵng)');
+
+--- Task 4 ---
 SELECT hop_dong.ma_khach_hang, khach_hang.ho_ten, COUNT(hop_dong.ma_hop_dong) AS so_lan_dat_phong
- FROM khach_hang JOIN hop_dong ON khach_hang.ma_khach_hang = hop_dong.ma_khach_hang WHERE ma_loai_khach = 1 GROUP BY hop_dong.ma_khach_hang ORDER BY so_lan_dat_phong;
+ FROM khach_hang JOIN hop_dong ON khach_hang.ma_khach_hang = hop_dong.ma_khach_hang 
+ WHERE ma_loai_khach = 1 GROUP BY hop_dong.ma_khach_hang ORDER BY so_lan_dat_phong;
  
  --- Task 5 ---
  SELECT 
