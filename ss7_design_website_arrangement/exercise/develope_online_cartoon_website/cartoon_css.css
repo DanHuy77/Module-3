@@ -1,0 +1,107 @@
+.container {
+
+    display: grid;
+    grid-template-columns: repeat(3, 500px);
+    grid-auto-rows: minmax(0px, auto);
+    grid-template-areas: "header1 header2 header3"
+        "napbar napbar napbar"
+        "leftsidebar content1 rightsidebar"
+        "footer footer footer";
+    row-gap: 10px;
+    column-gap: 10px;
+    /* background-image: url(https://m.media-amazon.com/images/M/MV5BZjc1ZmExYWMtNTg4Yy00ZDQyLTg5MmUtYmMyMTUxM2MxNWUwXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg); */
+    min-height: 100%;
+    background-color: rgb(255, 255, 255);
+}
+
+.header {
+    grid-area: header2;
+    background-color: gainsboro;
+}
+
+.header img {
+    width: 500px;
+    height: 285px;
+}
+
+.header-1 {
+    grid-area: header1;
+    background-color: gainsboro;
+
+}
+
+.header-1 img {
+    width: 500px;
+    height: 285px;
+}
+
+
+.header-2 {
+    grid-area: header3;
+    background-color: gainsboro;
+}
+
+.header-2 img {
+    width: 500px;
+    height: 285px;
+}
+
+
+.napbar {
+    grid-area: napbar;
+    background-color: gainsboro;
+    text-align: center;
+
+}
+
+.napbar a {
+    text-decoration: none;
+    color: black;
+}
+
+.napbar a:hover {
+    background-color: gray;
+}
+
+.leftsidebar {
+    grid-area: leftsidebar;
+    background-color: gainsboro;
+
+}
+
+.leftsidebar pre {
+    position: absolute;
+}
+
+.rightsidebar {
+    grid-area: rightsidebar;
+    background-color: gainsboro;
+}
+
+.content1 {
+    grid-area: content1;
+    text-align: center;
+}
+
+.content1 p {
+    background-color: gainsboro;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: gainsboro;
+    text-align: center;
+}
+
+.footer p {
+    font-size: 20px;
+}
+
+/* .content1 p {
+    text-align: center;
+} */
+
+* {
+    padding: 0;
+    margin: 0;
+}
