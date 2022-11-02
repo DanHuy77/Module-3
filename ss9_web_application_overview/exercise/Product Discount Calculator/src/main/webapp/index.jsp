@@ -13,8 +13,8 @@
 <body>
 <form action="/discount" method="post">
 <h1>Product Description: Shampoo</h1>
-<h1>List Price: <input name="price"></h1>
-<h1>Discount Percent: <input name="percent"></h1>
+<h1>List Price <br> <input name="price"></h1>
+<h1>Discount Percent <br> <input name="percent"></h1>
 <h1><button type="submit">Discount</button></h1>
 </form>
 </body>
