@@ -56,7 +56,8 @@
                                     href="/Layout/Facility/facility_list.html">Service</a>
                             </li>
                             <li class="nav-item">
-                                <a style="color: white;" class="nav-link" href="#">Contract</a>
+                                <a style="color: white;" class="nav-link"
+                                    href="/Layout/Contract/contract_list.html">Contract</a>
                             </li>
 
                     </div>
@@ -73,7 +74,8 @@
                 <h1 style="text-align: right;">Contract List</h1>
             </div>
             <div class="col-lg-5" style="text-align: right; margin-top: 20px;">
-                <a href="add_customer.html"><button class="btn btn-primary">Add new Contract</button></a>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalAddContract">Thêm
+                    mới hợp đồng</button>
             </div>
 
         </div>
@@ -81,14 +83,14 @@
             <thead>
                 <tr>
                     <th scope="col">.</th>
-                    <th scope="col">Facility Name</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Contract Start Day</th>
-                    <th scope="col">Contrac End Day</th>
-                    <th scope="col">Deposits</th>
-                    <th scope="col">Total Cost</th>
+                    <th scope="col">Tên dịch vụ</th>
+                    <th scope="col">Tên khách hàng</th>
+                    <th scope="col">Ngày bắt đầu</th>
+                    <th scope="col">Ngày kết thúc</th>
+                    <th scope="col">Tiền đặt cọc</th>
+                    <th scope="col">Tổng tiền</th>
                     <th scope="col"> </th>
-                    <th scope="col">Attached Service</th>
+                    <th scope="col">Dịch vụ đi kèm</th>
                 </tr>
             </thead>
             <tbody>
@@ -108,7 +110,7 @@
 
                     <td><button class="btn btn-success" type="button" data-bs-toggle="modal"
                             data-bs-target="#exampleModalList">
-                            Attached Service List
+                            Danh sách dịch vụ đi kèm
                         </button></td>
                 </tr>
             </tbody>
@@ -119,7 +121,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Details Contract Information</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm mới hợp đồng chi tiết</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -127,10 +129,10 @@
                             <table class="table table-success" style="width: 100%;">
 
                                 <tr>
-                                    <td>Quanity</td>
+                                    <td>Số lượng</td>
                                     <td><input type="text"></td>
                                 <tr>
-                                    <td>Attached Service Name</td>
+                                    <td>Dịch vụ đi kèm</td>
                                     <td><select style="width: 80%" class="form-select form-control-sm"
                                             aria-label="Default select example">
                                             <option selected>-- Choose --</option>
@@ -146,8 +148,8 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary">Confirm</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                            <button type="button" class="btn btn-primary">Xác nhận</button>
                         </div>
                     </div>
                 </div>
@@ -159,7 +161,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Attached Service List</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Danh sách dịch vụ đi kèm</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -167,10 +169,10 @@
                             <thead>
                                 <tr>
                                     <th scope="col">.</th>
-                                    <th scope="col">Attached Service Name</th>
-                                    <th scope="col">Cost</th>
-                                    <th scope="col">Unit</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Tên dịch vụ đi kèm</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Đơn vị</th>
+                                    <th scope="col">Trạng thái</th>
 
                                 </tr>
                             </thead>
@@ -187,6 +189,70 @@
                         </table>
                     </div>
                     <div class="modal-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModalAddContract" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Thêm mới hợp đồng</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-success">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Tên dịch vụ</th>
+                                    <th scope="col"><select style="width: 70%" class="form-select form-control-sm"
+                                            aria-label="Default select example">
+                                            <option selected>-- Chọn dịch vụ --</option>
+                                        </select></th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Tên khách hàng</th>
+                                    <th scope=""> <select style="width: 70%" class="form-select form-control-sm"
+                                            aria-label="Default select example">
+                                            <option selected>-- Chọn khách hàng --</option>
+                                        </select></th>
+                                </tr>
+
+                                <tr>
+                                    <th scope="col">Ngày bắt đầu</th>
+                                    <th scope="col"><input type="date"></th>
+                                </tr>
+
+                                <tr>
+                                    <th scope="col">Ngày kết thúc</th>
+                                    <th scope="col"><input type="date"></th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Tiền đặt cọc</th>
+                                    <th scope="col"><input type="text"></th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Tổng tiền</th>
+                                    <th scope="col"><input type="text" disabled value="0đ"></th>
+                                </tr>
+                                <tr>
+                                    <th scope="col">Dịch vụ đi kèm</th>
+                                    <th scope="col"><button class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalAdd">+</button></th>
+                                </tr>
+                            </thead>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                        <button class="btn btn-primary">Xác nhận</button>
 
                     </div>
                 </div>
