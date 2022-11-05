@@ -12,8 +12,8 @@
     <title>Product Info Input</title>
 </head>
 <body>
-<h1>Add new Product</h1>
-<a href="/product"><button>Back to Product List</button></a>
+<h1>Thêm mới sản phẩm</h1>
+<a href="/product"><button>Quay lại danh sách</button></a>
 <c:if test="${message!=null}">
     <span>${message}</span>
 </c:if>
@@ -36,7 +36,7 @@
             <td><input type="text" name="producer"></td>
         </tr>
         <tr>
-            <td><button>Confirm</button></td>
+            <td><button>Xác nhận</button></td>
         </tr>
     </table>
 </form>

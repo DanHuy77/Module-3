@@ -39,7 +39,6 @@ public class ProductServlet extends HttpServlet {
 
     private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        Product product = this.productService.findByID(id);
         productService.remove(id);
         response.sendRedirect("/product");
     }

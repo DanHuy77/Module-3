@@ -12,11 +12,10 @@
     <title>Product Remove</title>
 </head>
 <body>
-<form action="/product?action=remove" method="post">
+<form action="/product?action=remove&id=${product.getId()}" method="post">
     <h3>Are you sure?</h3>
     <table>
         <tr>
-            <td hidden>ID</td>
             <th>Tên</th>
             <th>Giá</th>
             <th>Mô Tả</th>
@@ -24,11 +23,10 @@
         </tr>
 
         <tr>
-            <td hidden><input type="text" name="id" value="${product.getId()}"></td>
-            <td><input type="text" name="name" value="${requestScope["product"].getName()}"></td>
-            <td><input type="text" name="email" value="${requestScope["product"].getPrice()}"></td>
-            <td><input type="text" name="address" value="${requestScope["product"].getDescription()}"></td>
-            <td><input type="text" name="address" value="${requestScope["product"].getProducer()}"></td>
+            <td>${requestScope["product"].getName()}</td>
+            <td>${requestScope["product"].getPrice()}</td>
+            <td>${requestScope["product"].getDescription()}</td>
+            <td>"${requestScope["product"].getProducer()}</td>
         </tr>
     </table>
     <button>Remove</button>
