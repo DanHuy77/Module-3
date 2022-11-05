@@ -22,6 +22,7 @@
         <th>Giá</th>
         <th>Mô Tả</th>
         <th>Nhà Sản Xuất</th>
+        <th>Edit</th>
         <th>Delete</th>
         <th>View</th>
     </tr>
