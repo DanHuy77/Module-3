@@ -10,4 +10,5 @@ public interface IProductService {
     Product findByID(int id);
     void update(int id, Product product);
     void remove(int id);
+    Product searchByName(String name);
 }

@@ -18,6 +18,10 @@
 <a href="/product?action=add">
     <button style="float: right" class="btn btn-primary">Thêm mới sản phẩm</button>
 </a>
+<form action="/product?action=search" class="d-flex" method="post">
+    <input name="name" style="width: 15%" class="form-control me-2" type="text" placeholder="Nhập tên sản phẩm" aria-label="Search">
+    <button class="btn btn-outline-success">Tìm kiếm sản phẩm</button>
+</form>
 <table class="table table-success">
     <tr>
         <th hidden>ID</th>
@@ -44,31 +48,7 @@
                         data-bs-target="#remove">
                     Xóa
                 </button>
-                <div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Chú ý!</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
 
-                            <div class="modal-body">
-                                Bạn có muốn xóa sản phẩm này không?
-                            </div>
-                            <div class="modal-footer">
-                                <form action="/product?action=remove&id=${product.getId()}" method="post">
-                                        <%-- <input name="id" value="${product.getId()}" hidden>--%>
-                                    <span><button type="button" class="btn btn-secondary"
-                                                  data-bs-dismiss="modal">Không</button></span>
-                                    <span><button class="btn btn-primary">Xác nhận</button></span>
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </td>
             <td><a href="/product?action=view&id=${product.getId()}">
                 <button class="btn btn-secondary">Xem chi tiết</button>
@@ -76,7 +56,31 @@
         </tr>
     </c:forEach>
 </table>
+<div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Chú ý!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
 
+            <div class="modal-body">
+                Bạn có muốn xóa sản phẩm này không?
+            </div>
+            <div class="modal-footer">
+                <form action="/product?action=remove&id=${product.getId()}" method="post">
+                    <%-- <input name="id" value="${product.getId()}" hidden>--%>
+                    <span><button type="button" class="btn btn-secondary"
+                                  data-bs-dismiss="modal">Không</button></span>
+                    <span><button class="btn btn-primary">Xác nhận</button></span>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
