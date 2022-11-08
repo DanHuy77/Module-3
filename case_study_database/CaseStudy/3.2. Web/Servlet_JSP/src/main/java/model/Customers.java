@@ -1,22 +1,33 @@
 package model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Customers {
     private int id;
     private String name;
-    private LocalDate birthday;
+    private java.sql.Date birthday;
     private boolean gender;
     private String idNumber;
     private String phoneNumber;
     private String email;
     private String address;
-    private String customerType;
+    private int customerTypeCode;
 
     public Customers() {
     }
 
-    public Customers(int id, String name, LocalDate birthday, boolean gender, String idNumber, String phoneNumber, String email, String address, String customerType) {
+    public Customers(String name, Date birthday, boolean gender, String idNumber, String phoneNumber, String email, String address, int customerTypeCode) {
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.idNumber = idNumber;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.customerTypeCode = customerTypeCode;
+    }
+
+    public Customers(int id, String name, Date birthday, boolean gender, String idNumber, String phoneNumber, String email, String address, int customerTypeCode) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -25,7 +36,7 @@ public class Customers {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
-        this.customerType = customerType;
+        this.customerTypeCode = customerTypeCode;
     }
 
     public int getId() {
@@ -44,11 +55,11 @@ public class Customers {
         this.name = name;
     }
 
-    public LocalDate getBirthday() {
+    public java.sql.Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(java.sql.Date birthday) {
         this.birthday = birthday;
     }
 
@@ -92,11 +103,11 @@ public class Customers {
         this.address = address;
     }
 
-    public String getCustomerType() {
-        return customerType;
+    public int getCustomerTypeCode() {
+        return customerTypeCode;
     }
 
-    public void setCustomerType(String customerType) {
-        this.customerType = customerType;
+    public void setCustomerTypeCode(int customerTypeCode) {
+        this.customerTypeCode = customerTypeCode;
     }
 }

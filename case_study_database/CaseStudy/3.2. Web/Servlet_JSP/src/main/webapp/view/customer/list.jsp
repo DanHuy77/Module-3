@@ -15,9 +15,14 @@
 </head>
 <body>
 <h1 style="text-align: center">Danh sách khách hàng</h1>
+<c:if test="${message != null}">
+    <p style="text-align: center">${message}</p>
+</c:if>
 
 <button type="button" style="float: right" class="btn btn-primary" data-bs-toggle="modal"
         data-bs-target="#add">Thêm mới khách hàng
+
+
 </button>
 
 <table class="table table-success">
@@ -31,33 +36,46 @@
         <th>Email</th>
         <th hidden>Địa chỉ</th>
         <th>Loại khách</th>
-        <th>Update</th>
-        <th>Delete</th>
-        <th>View</th>
+        <th>Cập nhật</th>
+        <th>Xóa</th>
+        <th>Xem chi tiết</th>
     </tr>
     <c:forEach var="customers" items="${customersList}">
         <tr>
             <td hidden>${customers.getId()}</td>
             <td>${customers.getName()}</td>
             <td>${customers.getBirthday()}</td>
-            <td>${customers.isGender()}</td>
+            <c:if test="${customers.isGender() == true}">
+                <td>Nam</td>
+            </c:if>
+            <c:if test="${customers.isGender() == false}">
+                <td>Nữ</td>
+            </c:if>
+<%--            <td>${customers.isGender()}</td>--%>
             <td hidden>${customers.getIdNumber()}</td>
             <td>${customers.getPhoneNumber()}</td>
             <td>${customers.getEmail()}</td>
             <td hidden>${customers.getAddress()}</td>
-            <td>${customers.getCustomerType()}</td>
+            
+            <c:forEach var="custype" items="${customerTypeList}">
+                <c:if test="${custype.customerTypeCode == customers.getCustomerTypeCode()}">
+                    <td>${custype.customerTypeName}</td>
+                </c:if>
+            </c:forEach>
+            
+<%--            <td>${customers.getCustomerTypeCode()}</td>--%>
             <td>
                 <button class="btn btn-success" type="button" data-bs-toggle="modal"
-                        data-bs-target="#edit">Edit
+                        data-bs-target="#edit">Cập nhật
                 </button>
             </td>
             <td>
                 <button class="btn btn-danger" type="button" data-bs-toggle="modal"
-                        data-bs-target="#remove">Remove
+                        data-bs-target="#remove">Xóa
                 </button>
             </td>
             <td><a href="/customer?action=view&id=${customers.getId()}">
-                <button class="btn btn-secondary">View</button>
+                <button class="btn btn-secondary">Xem chi tiết</button>
             </a></td>
         </tr>
         <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -99,14 +117,14 @@
                             <pre>Địa chỉ       <input name="address" type="text"
                                                       value="${customers.getAddress()}"></pre>
 
-                            <pre>Loại khách    <select name="customerType" style="width: 45%"
+                            <pre>Loại khách    <select name="customerTypeCode" style="width: 45%"
                                                        class="form-select form-control-sm"
                                                        aria-label="Default select example">
-                                <option value="Diamond" selected>Diamond</option>
-                                <option value="Platinum">Platinum</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Member">Member</option>
+                                <option value="1" selected>Diamond</option>
+                                <option value="2">Platinum</option>
+                                <option value="3">Gold</option>
+                                <option value="4">Silver</option>
+                                <option value="5">Member</option>
                             </select></pre>
                         </div>
 
@@ -152,12 +170,6 @@
 
     </c:forEach>
 </table>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-        crossorigin="anonymous"></script>
-
 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -169,8 +181,6 @@
             <form action="/customers?action=add" method="post">
                 <div class="modal-body">
 
-                    <pre>ID            <input name="id"></pre>
-
                     <pre>Tên           <input name="name"></pre>
 
 
@@ -180,9 +190,9 @@
                     <pre>Giới tính     <select name="gender" style="width: 45%; height: 70%"
                                                class="form-select form-control-sm"
                                                aria-label="Default select example">
-                                <option value="1" selected>true</option>
-                                <option value="2">false</option>
-                            </select></pre>
+                                    <option value="true" selected>Nam</option>
+                                    <option value="false">Nữ</option>
+                                </select></pre>
 
 
                     <pre>Số CMND       <input name="idNumber" type="text"></pre>
@@ -195,15 +205,14 @@
 
                     <pre>Địa chỉ       <input name="address" type="text"></pre>
 
-                    <pre>Loại khách    <select name="customerType" style="width: 45%"
+                    <pre>Loại khách    <select name="customerTypeCode" style="width: 45%"
                                                class="form-select form-control-sm"
                                                aria-label="Default select example">
-                                <option value="Diamond" selected>Diamond</option>
-                                <option value="Platinum">Platinum</option>
-                                <option value="Gold">Gold</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Member">Member</option>
-                            </select></pre>
+
+                            <c:forEach var="cus" items="${customerTypeList}">
+                                <option value="${cus.customerTypeCode}">${cus.customerTypeName}</option>
+                            </c:forEach>
+                                </select></pre>
                 </div>
 
                 <div class="modal-footer">
@@ -218,5 +227,9 @@
     </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
 </body>
 </html>

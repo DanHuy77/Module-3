@@ -16,8 +16,8 @@ public class CustomersService implements ICustomersService {
     }
 
     @Override
-    public void save(Customers customers) {
-        customersRepository.save(customers);
+    public boolean save(Customers customers) {
+        return customersRepository.save(customers);
     }
 
     @Override
