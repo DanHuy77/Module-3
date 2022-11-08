@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 
 public class Customers {
+    private int id;
     private String name;
     private LocalDate birthday;
     private boolean gender;
@@ -15,7 +16,8 @@ public class Customers {
     public Customers() {
     }
 
-    public Customers(String name, LocalDate birthday, boolean gender, String idNumber, String phoneNumber, String email, String address, String customerType) {
+    public Customers(int id, String name, LocalDate birthday, boolean gender, String idNumber, String phoneNumber, String email, String address, String customerType) {
+        this.id = id;
         this.name = name;
         this.birthday = birthday;
         this.gender = gender;
@@ -24,6 +26,14 @@ public class Customers {
         this.email = email;
         this.address = address;
         this.customerType = customerType;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
