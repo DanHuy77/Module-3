@@ -11,7 +11,8 @@ import java.util.List;
 public class CustomersRepository implements ICustomersRepository {
     private final String SELECT_ALL = "SELECT * FROM customer;";
     private final String INSERT_CUSTOMERS = "INSERT INTO customer(full_name, birthday, gender, ID_number, telephone,email, address, customer_type_code) " + " values(?, ?, ?, ?, ?, ? ,?, ?);";
-
+    private final String DELETE_CUSTOMERS = "DELETE FROM customer WHERE customer.customer_code = ?;";
+    private final String EDIT_CUSTOMERS = "UPDATE customer SET customer.full_name = ?, customer.birthday = ?, customer.gender = ?, customer.ID_number = ?, customer.telephone = ?, customer.email = ?, customer.address = ?, customer.customer_type_code = ? WHERE customer.customer_code =?;";
 
     @Override
     public List<Customers> findAll() {
@@ -66,13 +67,37 @@ public class CustomersRepository implements ICustomersRepository {
     }
 
     @Override
-    public void update(int id, Customers customers) {
-
+    public boolean update(int id, Customers customers) {
+        Connection connection = BaseRepository.getConnectDB();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(EDIT_CUSTOMERS);
+            preparedStatement.setString(1, customers.getName());
+            preparedStatement.setDate(2, customers.getBirthday());
+            preparedStatement.setBoolean(3, customers.isGender());
+            preparedStatement.setString(4, customers.getIdNumber());
+            preparedStatement.setString(5, customers.getPhoneNumber());
+            preparedStatement.setString(6, customers.getEmail());
+            preparedStatement.setString(7, customers.getAddress());
+            preparedStatement.setInt(8, customers.getCustomerTypeCode());
+            preparedStatement.setInt(9, id);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
     @Override
-    public void remove(int id) {
-
+    public boolean remove(int id) {
+        Connection connection = BaseRepository.getConnectDB();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CUSTOMERS);
+            preparedStatement.setInt(1, id);
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
     @Override

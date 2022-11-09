@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService implements IUserService {
-    IUserRepository userRepository=new UserRepository();
+    private IUserRepository userRepository=new UserRepository();
 
     @Override
     public boolean add(User user) {

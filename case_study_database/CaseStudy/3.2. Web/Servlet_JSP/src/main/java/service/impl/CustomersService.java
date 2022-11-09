@@ -26,13 +26,13 @@ public class CustomersService implements ICustomersService {
     }
 
     @Override
-    public void update(int id, Customers customers) {
-        customersRepository.update(id, customers);
+    public boolean update(int id, Customers customers) {
+        return customersRepository.update(id, customers);
     }
 
     @Override
-    public void remove(int id) {
-        customersRepository.remove(id);
+    public boolean remove(int id) {
+       return customersRepository.remove(id);
     }
 
     @Override

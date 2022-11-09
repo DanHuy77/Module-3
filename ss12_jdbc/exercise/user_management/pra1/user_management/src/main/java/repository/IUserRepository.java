@@ -5,7 +5,7 @@ import model.User;
 import java.util.List;
 
 public interface IUserRepository {
-    public boolean add(User user);
+    boolean add(User user);
 
     List<User> findByCountry(String str);
 

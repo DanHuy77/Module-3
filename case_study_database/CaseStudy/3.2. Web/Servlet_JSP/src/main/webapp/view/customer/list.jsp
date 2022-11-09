@@ -28,6 +28,7 @@
 <table class="table table-success">
     <tr>
         <th hidden>ID</th>
+        <th>Số thứ tự</th>
         <th>Tên</th>
         <th>Ngày sinh</th>
         <th>Giới tính</th>
@@ -40,9 +41,10 @@
         <th>Xóa</th>
         <th>Xem chi tiết</th>
     </tr>
-    <c:forEach var="customers" items="${customersList}">
+    <c:forEach var="customers" items="${customersList}" varStatus="status">
         <tr>
             <td hidden>${customers.getId()}</td>
+            <td>${status.count}</td>
             <td>${customers.getName()}</td>
             <td>${customers.getBirthday()}</td>
             <c:if test="${customers.isGender() == true}">
@@ -51,26 +53,29 @@
             <c:if test="${customers.isGender() == false}">
                 <td>Nữ</td>
             </c:if>
-<%--            <td>${customers.isGender()}</td>--%>
+
             <td hidden>${customers.getIdNumber()}</td>
             <td>${customers.getPhoneNumber()}</td>
             <td>${customers.getEmail()}</td>
             <td hidden>${customers.getAddress()}</td>
-            
+
             <c:forEach var="custype" items="${customerTypeList}">
                 <c:if test="${custype.customerTypeCode == customers.getCustomerTypeCode()}">
                     <td>${custype.customerTypeName}</td>
                 </c:if>
             </c:forEach>
-            
-<%--            <td>${customers.getCustomerTypeCode()}</td>--%>
+
             <td>
-                <button class="btn btn-success" type="button" data-bs-toggle="modal"
+                <button onclick="passEditInfo('${customers.getId()}','${customers.getName()}','${customers.getBirthday()}',
+                        '${customers.getIdNumber()}','${customers.getPhoneNumber()}',
+                        '${customers.getEmail()}','${customers.getAddress()}')"
+                        class="btn btn-success" type="button" data-bs-toggle="modal"
                         data-bs-target="#edit">Cập nhật
                 </button>
             </td>
             <td>
-                <button class="btn btn-danger" type="button" data-bs-toggle="modal"
+                <button onclick="passInfo('${customers.getId()}','${customers.getName()}')" class="btn btn-danger"
+                        type="button" data-bs-toggle="modal"
                         data-bs-target="#remove">Xóa
                 </button>
             </td>
@@ -78,98 +83,14 @@
                 <button class="btn btn-secondary">Xem chi tiết</button>
             </a></td>
         </tr>
-        <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabelRemove">Cập nhật thông tin</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="/customers?action=edit&id=${customers.getId()}" method="post">
-                        <div class="modal-body">
-
-                            <pre>Tên           <input name="name" value="${customers.getName()}"></pre>
-
-
-                            <pre>Ngày Sinh     <input name="birthday" type="date"
-                                                      value="${customers.getBirthday()}"></pre>
-
-
-                            <pre>Giới tính     <select name="gender" style="width: 45%"
-                                                       class="form-select form-control-sm"
-                                                       aria-label="Default select example">
-                                <option selected>${customers.isGender()}</option>
-                                <option value="2">${!customers.isGender()}</option>
-                            </select></pre>
-
-
-                            <pre>Số CMND       <input name="idNumber" type="text"
-                                                      value="${customers.getIdNumber()}"></pre>
-
-                            <pre>Số điện thoại <input name="phoneNumber" type="text"
-                                                      value="${customers.getPhoneNumber()}"></pre>
-
-
-                            <pre>Email         <input name="email" type="text" value="${customers.getEmail()}"></pre>
-
-
-                            <pre>Địa chỉ       <input name="address" type="text"
-                                                      value="${customers.getAddress()}"></pre>
-
-                            <pre>Loại khách    <select name="customerTypeCode" style="width: 45%"
-                                                       class="form-select form-control-sm"
-                                                       aria-label="Default select example">
-                                <option value="1" selected>Diamond</option>
-                                <option value="2">Platinum</option>
-                                <option value="3">Gold</option>
-                                <option value="4">Silver</option>
-                                <option value="5">Member</option>
-                            </select></pre>
-                        </div>
-
-                        <div class="modal-footer">
-
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
-                            <button type="submit" class="btn btn-primary">Lưu</button>
-
-                        </div>
-                    </form>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="modal fade" id="remove${customers.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Chú ý!</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        Bạn có muốn xóa khách hàng này không?
-                    </div>
-                    <div class="modal-footer">
-                        <form action="/customers?action=remove&id=${customers.getId()}" method="post">
-                                <%-- <input name="id" value="${product.getId()}" hidden>--%>
-                            <span><button type="button" class="btn btn-secondary"
-                                          data-bs-dismiss="modal">Không</button></span>
-                            <span><button class="btn btn-primary">Xác nhận</button></span>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </c:forEach>
 </table>
+
+
+<%--Modal add--%>
+
+
 <div class="modal fade" id="add" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
@@ -208,8 +129,10 @@
                     <pre>Loại khách    <select name="customerTypeCode" style="width: 45%"
                                                class="form-select form-control-sm"
                                                aria-label="Default select example">
+                        <option selected>-- Chọn loại khách --</option>
 
                             <c:forEach var="cus" items="${customerTypeList}">
+
                                 <option value="${cus.customerTypeCode}">${cus.customerTypeName}</option>
                             </c:forEach>
                                 </select></pre>
@@ -228,8 +151,125 @@
 
 </div>
 
+
+<%--Modal Xóa--%>
+
+<div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Chú ý!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <form action="/customers?action=remove" method="post">
+                <div class="modal-body">
+                    <input hidden type="text" name="cusId" id="cusId">
+                    Bạn có muốn xóa khách hàng "<span id="cusName"></span>" không?
+                </div>
+                <div class="modal-footer">
+
+
+                    <span><button type="button" class="btn btn-secondary"
+                                  data-bs-dismiss="modal">Không</button></span>
+                    <span><button class="btn btn-primary">Xác nhận</button></span>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<%--Modal Edit--%>
+
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabelRemove">Cập nhật thông tin</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/customers?action=edit" method="post">
+                <div class="modal-body">
+                    <input hidden id="editId" name="id">
+
+                    <pre>Tên           <input id="editName" name="name"></pre>
+
+
+                    <pre>Ngày Sinh     <input id="editBirthday" name="birthday" type="date"></pre>
+
+
+                    <pre>Giới tính     <select name="gender" style="width: 45%"
+                                               class="form-select form-control-sm"
+                                               aria-label="Default select example">
+                        <option selected>Chọn giới tính</option>
+                                <option value="true">Nam</option>
+                                <option value="false">Nữ</option>
+                            </select></pre>
+
+
+                    <pre>Số CMND       <input id="editIdNumber" name="idNumber" type="text"></pre>
+
+                    <pre>Số điện thoại <input id="editPhoneNumber" name="phoneNumber" type="text"></pre>
+
+
+                    <pre>Email         <input id="editEmail" name="email" type="text"></pre>
+
+
+                    <pre>Địa chỉ       <input id="editAddress" name="address" type="text"></pre>
+
+                    <pre>Loại khách    <select name="customerTypeCode" style="width: 45%"
+                                               class="form-select form-control-sm"
+                                               aria-label="Default select example">
+                        <option selected>Chọn loại khách</option>
+                                <option value="1">Diamond</option>
+                                <option value="2">Platinum</option>
+                                <option value="3">Gold</option>
+                                <option value="4">Silver</option>
+                                <option value="5">Member</option>
+                            </select></pre>
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
+
 </body>
+<script>
+    function passInfo(id, name) {
+        document.getElementById("cusId").value = id;
+        document.getElementById("cusName").innerText = name;
+    }
+
+    function passEditInfo(id, name, birthday, idNumber, phoneNumber, email, address) {
+        document.getElementById("editId").value = id;
+        document.getElementById("editName").value = name;
+        document.getElementById("editBirthday").value = birthday;
+        document.getElementById("editIdNumber").value = idNumber;
+        document.getElementById("editPhoneNumber").value = phoneNumber;
+        document.getElementById("editEmail").value = email;
+        document.getElementById("editAddress").value = address;
+    }
+</script>
 </html>

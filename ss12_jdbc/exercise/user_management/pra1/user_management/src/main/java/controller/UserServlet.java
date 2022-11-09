@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "UserServlet",urlPatterns = "/user")
+@WebServlet(name = "UserServlet", urlPatterns = "/user")
 public class UserServlet extends HttpServlet {
 
-    private IUserService userService =new UserService();
+    private IUserService userService = new UserService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -26,16 +26,16 @@ public class UserServlet extends HttpServlet {
 
         switch (action) {
             case "add":
-                save(request,response);
+                save(request, response);
                 break;
             case "edit":
-                update(request,response);
+                update(request, response);
                 break;
             case "remove":
-                remove(request,response);
+                remove(request, response);
                 break;
             case "findByCountry":
-                findByCountry(request,response);
+                findByCountry(request, response);
                 break;
 
             default:
@@ -43,13 +43,12 @@ public class UserServlet extends HttpServlet {
     }
 
 
-
     private void findByCountry(HttpServletRequest request, HttpServletResponse response) {
-        String country=request.getParameter("country");
-        List<User> userList=userService.findByCountry(country);
-        request.setAttribute("userList",userList);
+        String country = request.getParameter("country");
+        List<User> userList = userService.findByCountry(country);
+        request.setAttribute("userList", userList);
         try {
-            request.getRequestDispatcher("user/search.jsp").forward(request,response);
+            request.getRequestDispatcher("user/search.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -58,13 +57,13 @@ public class UserServlet extends HttpServlet {
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response) {
-      int id=Integer.parseInt(request.getParameter("id"));
-      boolean check=userService.remove(id);
-      String mess="Delete Error";
-      if (check){
-          mess="DELETE WELL DONE";
-      }
-      request.setAttribute("mess","DELETE WELL DONE");
+        int id = Integer.parseInt(request.getParameter("id"));
+        boolean check = userService.remove(id);
+        String info_message = "Delete Error";
+        if (check) {
+            info_message = "DELETE WELL DONE";
+        }
+        request.setAttribute("info_message", info_message);
         try {
             response.sendRedirect("/user");
         } catch (IOException e) {
@@ -75,24 +74,24 @@ public class UserServlet extends HttpServlet {
     }
 
     private void update(HttpServletRequest request, HttpServletResponse response) {
-        int id=Integer.parseInt(request.getParameter("id"));
-        String name=request.getParameter("name");
-        String email=request.getParameter("email");
-        String country=request.getParameter("country");
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String country = request.getParameter("country");
 
-        User user=new User(id,name,email,country);
+        User user = new User(id, name, email, country);
 
-        userService.update(id,user);
+        userService.update(id, user);
 
-        boolean check=userService.update(id,user);
+        boolean check = userService.update(id, user);
 
-        String mess="Error Edit";
-        if (check){
-            mess="Edit well done";
+        String info_message = "Error Edit";
+        if (check) {
+            info_message = "Edit well done";
         }
-        request.setAttribute("mess","Edit well done");
+        request.setAttribute("mess", info_message);
         try {
-            request.getRequestDispatcher("user/edit.jsp").forward(request,response);
+            request.getRequestDispatcher("user/edit.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -101,20 +100,20 @@ public class UserServlet extends HttpServlet {
     }
 
     private void save(HttpServletRequest request, HttpServletResponse response) {
-        int id =Integer.parseInt(request.getParameter("id"));
-        String name=request.getParameter("name");
-        String email=request.getParameter("email");
-        String country=request.getParameter("country");
-        User user = new User(id,name,email,country);
-        boolean check=userService.add(user);
-        String mess="Error create";
-        if (check){
-            mess="Added";
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String country = request.getParameter("country");
+        User user = new User(id, name, email, country);
+        boolean check = userService.add(user);
+        String info_message = "Error create";
+        if (check) {
+            info_message = "Added";
         }
 
-        request.setAttribute("mess","Added");
+        request.setAttribute("mess", info_message);
         try {
-            request.getRequestDispatcher("user/create.jsp").forward(request,response);
+            request.getRequestDispatcher("user/create.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -130,34 +129,34 @@ public class UserServlet extends HttpServlet {
 
         switch (action) {
             case "add":
-                showInputForm(request,response);
+                showInputForm(request, response);
                 break;
             case "edit":
-                showEditForm(request,response);
+                showEditForm(request, response);
                 break;
             default:
-                showList(request,response);
+                showList(request, response);
         }
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        List<User> userList=userService.findAll();
+        List<User> userList = userService.findAll();
         User user = null;
-        String str="";
-        for (User value:userList){
-            if (value.getId()==id){
-                user=value;
+        String str = "";
+        for (User value : userList) {
+            if (value.getId() == id) {
+                user = value;
                 break;
             }
         }
-        request.setAttribute("id",user.getId());
-        request.setAttribute("name",user.getName());
-        request.setAttribute("email",user.getEmail());
-        request.setAttribute("country",user.getCountry());
+        request.setAttribute("id", user.getId());
+        request.setAttribute("name", user.getName());
+        request.setAttribute("email", user.getEmail());
+        request.setAttribute("country", user.getCountry());
 
         try {
-            request.getRequestDispatcher("user/edit.jsp").forward(request,response);
+            request.getRequestDispatcher("user/edit.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -167,7 +166,7 @@ public class UserServlet extends HttpServlet {
 
     private void showInputForm(HttpServletRequest request, HttpServletResponse response) {
         try {
-            request.getRequestDispatcher("user/create.jsp").forward(request,response);
+            request.getRequestDispatcher("user/create.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -176,11 +175,11 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showList(HttpServletRequest request, HttpServletResponse response) {
-        List<User> userList=userService.findAll();
+        List<User> userList = userService.findAll();
 
-        request.setAttribute("userList",userList);
+        request.setAttribute("userList", userList);
         try {
-            request.getRequestDispatcher("user/list.jsp").forward(request,response);
+            request.getRequestDispatcher("user/list.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {

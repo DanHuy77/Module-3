@@ -45,10 +45,15 @@ public class CustomersServlet extends HttpServlet {
         }
     }
 
-    private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        customersService.remove(id);
-        response.sendRedirect("/customers");
+    private void remove(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        int id = Integer.parseInt(request.getParameter("cusId"));
+        boolean check = customersService.remove(id);
+        String message = "Xóa không thành công";
+        if (check) {
+            message = "Xóa thành công!";
+        }
+        request.setAttribute("message", message);
+        showCustomersList(request, response);
     }
 
     private void add(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -60,18 +65,34 @@ public class CustomersServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         int customerTypeCode = Integer.parseInt(request.getParameter("customerTypeCode"));
-        Customers customers = new Customers(name,birthday,gender,idNumber,phoneNumber,email, address,customerTypeCode);
+        Customers customers = new Customers(name, birthday, gender, idNumber, phoneNumber, email, address, customerTypeCode);
         boolean check = customersService.save(customers);
         String message = "Thêm mới không thành công";
-        if (check){
+        if (check) {
             message = "Thêm mới thành công";
         }
         request.setAttribute("message", message);
-        showCustomersList(request,response);
+        showCustomersList(request, response);
     }
 
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        Date birthday = Date.valueOf(request.getParameter("birthday"));
+        boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
+        String idNumber = request.getParameter("idNumber");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        int customerTypeCode = Integer.parseInt(request.getParameter("customerTypeCode"));
+        Customers customers = new Customers(name, birthday, gender, idNumber, phoneNumber, email, address, customerTypeCode);
+        boolean check = customersService.update(id, customers);
+        String message = "Cập nhật không thành công";
+        if (check) {
+            message = "Cập nhật thành công";
+        }
+        request.setAttribute("message", message);
+        showCustomersList(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
