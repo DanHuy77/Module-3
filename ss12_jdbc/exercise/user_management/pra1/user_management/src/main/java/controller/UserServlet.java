@@ -59,11 +59,11 @@ public class UserServlet extends HttpServlet {
     private void remove(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
         boolean check = userService.remove(id);
-        String info_message = "Delete Error";
+        String infoMessage = "Delete Error";
         if (check) {
-            info_message = "DELETE WELL DONE";
+            infoMessage = "DELETE WELL DONE";
         }
-        request.setAttribute("info_message", info_message);
+        request.setAttribute("info_message", infoMessage);
         try {
             response.sendRedirect("/user");
         } catch (IOException e) {
@@ -85,11 +85,11 @@ public class UserServlet extends HttpServlet {
 
         boolean check = userService.update(id, user);
 
-        String info_message = "Error Edit";
+        String infoMessage = "Error Edit";
         if (check) {
-            info_message = "Edit well done";
+            infoMessage = "Edit well done";
         }
-        request.setAttribute("mess", info_message);
+        request.setAttribute("mess", infoMessage);
         try {
             request.getRequestDispatcher("user/edit.jsp").forward(request, response);
         } catch (ServletException e) {
@@ -106,12 +106,12 @@ public class UserServlet extends HttpServlet {
         String country = request.getParameter("country");
         User user = new User(id, name, email, country);
         boolean check = userService.add(user);
-        String info_message = "Error create";
+        String infoMessage = "Error create";
         if (check) {
-            info_message = "Added";
+            infoMessage = "Added";
         }
 
-        request.setAttribute("mess", info_message);
+        request.setAttribute("mess", infoMessage);
         try {
             request.getRequestDispatcher("user/create.jsp").forward(request, response);
         } catch (ServletException e) {

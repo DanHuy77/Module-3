@@ -227,13 +227,14 @@
                     <pre>Loại khách    <select name="customerTypeCode" style="width: 45%"
                                                class="form-select form-control-sm"
                                                aria-label="Default select example">
-                        <option selected>Chọn loại khách</option>
-                                <option value="1">Diamond</option>
-                                <option value="2">Platinum</option>
-                                <option value="3">Gold</option>
-                                <option value="4">Silver</option>
-                                <option value="5">Member</option>
-                            </select></pre>
+                        <option selected>-- Chọn loại khách --</option>
+
+                            <c:forEach var="cus" items="${customerTypeList}">
+                                <option selected id="editCusType" value=""></option>
+
+                                <option value="${cus.customerTypeCode}">${cus.customerTypeName}</option>
+                            </c:forEach>
+                                </select></pre>
                 </div>
 
                 <div class="modal-footer">
