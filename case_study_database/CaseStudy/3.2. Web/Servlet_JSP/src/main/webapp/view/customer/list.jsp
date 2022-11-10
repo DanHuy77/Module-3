@@ -65,8 +65,8 @@
             </c:forEach>
             <td>
                 <button onclick="passEditInfo('${customers.getId()}','${customers.getName()}','${customers.getBirthday()}',
-                        '${customers.getIdNumber()}','${customers.getPhoneNumber()}',
-                        '${customers.getEmail()}','${customers.getAddress()}')"
+                        '${customers.isGender()}','${customers.getIdNumber()}','${customers.getPhoneNumber()}',
+                        '${customers.getEmail()}','${customers.getAddress()}', ${customers.getCustomerTypeCode()})"
                         class="btn btn-success" type="button" data-bs-toggle="modal"
                         data-bs-target="#edit">Cập nhật
                 </button>
@@ -202,7 +202,7 @@
                     <pre>Ngày Sinh     <input id="editBirthday" name="birthday" type="date"></pre>
 
 
-                    <pre>Giới tính     <select name="gender" style="width: 45%"
+                    <pre>Giới tính     <select id="editCusGen" name="gender" style="width: 45%"
                                                class="form-select form-control-sm"
                                                aria-label="Default select example">
                         <option selected>Chọn giới tính</option>
@@ -221,14 +221,11 @@
 
                     <pre>Địa chỉ       <input id="editAddress" name="address" type="text"></pre>
 
-                    <pre>Loại khách    <select name="customerTypeCode" style="width: 45%"
+                    <pre>Loại khách    <select id="cusTypeCode" name="customerTypeCode" style="width: 45%"
                                                class="form-select form-control-sm"
                                                aria-label="Default select example">
-                        <option selected>-- Chọn loại khách --</option>
 
                             <c:forEach var="cus" items="${customerTypeList}">
-                                <option selected id="editCusType" value=""></option>
-
                                 <option value="${cus.customerTypeCode}">${cus.customerTypeName}</option>
                             </c:forEach>
                                 </select></pre>
@@ -260,14 +257,16 @@
         document.getElementById("cusName").innerText = name;
     }
 
-    function passEditInfo(id, name, birthday, idNumber, phoneNumber, email, address) {
+    function passEditInfo(id, name, birthday, gender, idNumber, phoneNumber, email, address, typeCode) {
         document.getElementById("editId").value = id;
         document.getElementById("editName").value = name;
         document.getElementById("editBirthday").value = birthday;
+        document.getElementById("editCusGen").value = gender;
         document.getElementById("editIdNumber").value = idNumber;
         document.getElementById("editPhoneNumber").value = phoneNumber;
         document.getElementById("editEmail").value = email;
         document.getElementById("editAddress").value = address;
+        document.getElementById("cusTypeCode").value = typeCode;
     }
 </script>
 </html>
