@@ -1,19 +1,22 @@
 package service.impl;
 
 import model.Facility;
+import repository.IFacilityRepository;
+import repository.impl.FacilityRepository;
 import service.IFacilityService;
 
 import java.util.List;
 
 public class FacilityService implements IFacilityService {
+    IFacilityRepository facilityRepository = new FacilityRepository();
     @Override
     public List<Facility> findAll() {
-        return null;
+        return facilityRepository.findAll();
     }
 
     @Override
     public boolean save(Facility facility) {
-        return false;
+        return facilityRepository.save(facility);
     }
 
     @Override
@@ -23,12 +26,12 @@ public class FacilityService implements IFacilityService {
 
     @Override
     public boolean update(int id, Facility facility) {
-        return false;
+        return facilityRepository.update(id, facility);
     }
 
     @Override
     public boolean remove(int id) {
-        return false;
+        return facilityRepository.remove(id);
     }
 
     @Override

@@ -61,7 +61,7 @@
                         </li>
                         <li class="nav-item">
                             <a style="color: white;" class="nav-link"
-                               href="/Layout/Facility/facility_list.html">Service</a>
+                               href="/facility">Service</a>
                         </li>
                         <li class="nav-item">
                             <a style="color: white;" class="nav-link"

@@ -13,6 +13,52 @@ public class Facility {
     private String freeService;
     private int rentalTypeCode;
     private int facilityTypeCode;
+    private String rentalTypeName;
+    private String facilityTypeName;
+
+    public Facility(String name, int area, double rentalCost, int maxUser, String roomStandard, String otherDescription, double poolArea, int floorNumber, int rentalTypeCode, int facilityTypeCode) {
+        this.name = name;
+        this.area = area;
+        this.rentalCost = rentalCost;
+        this.maxUser = maxUser;
+        this.roomStandard = roomStandard;
+        this.otherDescription = otherDescription;
+        this.poolArea = poolArea;
+        this.floorNumber = floorNumber;
+        this.rentalTypeCode = rentalTypeCode;
+        this.facilityTypeCode = facilityTypeCode;
+    }
+
+    public Facility(String name, int area, double rentalCost, int maxUser, String roomStandard, String otherDescription, double poolArea, int floorNumber, String freeService, int rentalTypeCode, int facilityTypeCode, String rentalTypeName, String facilityTypeName) {
+        this.name = name;
+        this.area = area;
+        this.rentalCost = rentalCost;
+        this.maxUser = maxUser;
+        this.roomStandard = roomStandard;
+        this.otherDescription = otherDescription;
+        this.poolArea = poolArea;
+        this.floorNumber = floorNumber;
+        this.freeService = freeService;
+        this.rentalTypeCode = rentalTypeCode;
+        this.facilityTypeCode = facilityTypeCode;
+        this.rentalTypeName = rentalTypeName;
+        this.facilityTypeName = facilityTypeName;
+    }
+
+    public Facility(int id, String name, int area, double rentalCost, int maxUser, String roomStandard, String otherDescription, double poolArea, int floorNumber, String freeService, String rentalTypeName, String facilityTypeName) {
+        this.id = id;
+        this.name = name;
+        this.area = area;
+        this.rentalCost = rentalCost;
+        this.maxUser = maxUser;
+        this.roomStandard = roomStandard;
+        this.otherDescription = otherDescription;
+        this.poolArea = poolArea;
+        this.floorNumber = floorNumber;
+        this.freeService = freeService;
+        this.rentalTypeName = rentalTypeName;
+        this.facilityTypeName = facilityTypeName;
+    }
 
     public Facility(String name, int area, double rentalCost, int maxUser, String roomStandard, String otherDescription, double poolArea, int floorNumber, String freeService, int rentalTypeCode, int facilityTypeCode) {
         this.name = name;
@@ -137,5 +183,21 @@ public class Facility {
 
     public void setFacilityTypeCode(int facilityTypeCode) {
         this.facilityTypeCode = facilityTypeCode;
+    }
+
+    public String getRentalTypeName() {
+        return rentalTypeName;
+    }
+
+    public void setRentalTypeName(String rentalTypeName) {
+        this.rentalTypeName = rentalTypeName;
+    }
+
+    public String getFacilityTypeName() {
+        return facilityTypeName;
+    }
+
+    public void setFacilityTypeName(String facilityTypeName) {
+        this.facilityTypeName = facilityTypeName;
     }
 }

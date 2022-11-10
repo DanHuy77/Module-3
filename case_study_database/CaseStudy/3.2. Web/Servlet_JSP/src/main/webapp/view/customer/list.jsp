@@ -28,14 +28,14 @@
 <table class="table table-success">
     <tr>
         <th hidden>ID</th>
-        <th>Số thứ tự</th>
+        <th>Stt</th>
         <th>Tên</th>
         <th>Ngày sinh</th>
         <th>Giới tính</th>
         <th hidden>Số CMND</th>
         <th>Số điện thoại</th>
         <th>Email</th>
-        <th hidden>Địa chỉ</th>
+        <th>Địa chỉ</th>
         <th>Loại khách</th>
         <th>Cập nhật</th>
         <th>Xóa</th>
@@ -57,14 +57,12 @@
             <td hidden>${customers.getIdNumber()}</td>
             <td>${customers.getPhoneNumber()}</td>
             <td>${customers.getEmail()}</td>
-            <td hidden>${customers.getAddress()}</td>
-
+            <td>${customers.getAddress()}</td>
             <c:forEach var="custype" items="${customerTypeList}">
                 <c:if test="${custype.customerTypeCode == customers.getCustomerTypeCode()}">
                     <td>${custype.customerTypeName}</td>
                 </c:if>
             </c:forEach>
-
             <td>
                 <button onclick="passEditInfo('${customers.getId()}','${customers.getName()}','${customers.getBirthday()}',
                         '${customers.getIdNumber()}','${customers.getPhoneNumber()}',
@@ -132,7 +130,6 @@
                         <option selected>-- Chọn loại khách --</option>
 
                             <c:forEach var="cus" items="${customerTypeList}">
-
                                 <option value="${cus.customerTypeCode}">${cus.customerTypeName}</option>
                             </c:forEach>
                                 </select></pre>
