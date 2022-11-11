@@ -21,7 +21,7 @@ public class FacilityService implements IFacilityService {
 
     @Override
     public Facility findByID(int id) {
-        return null;
+        return facilityRepository.findByID(id);
     }
 
     @Override

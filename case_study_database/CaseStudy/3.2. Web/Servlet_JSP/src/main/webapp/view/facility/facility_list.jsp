@@ -12,6 +12,8 @@
 <html>
 <head>
     <title>Danh sách cơ sở dịch vụ</title>
+    <link rel="stylesheet" href="bootstrap520/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap5.min.css" />
 </head>
 <body>
 <h1 style="text-align: center">Danh sách cơ sở dịch vụ</h1>
@@ -30,7 +32,7 @@
     </ul>
 </div>
 
-<table class="table table-success ">
+<table id="tableFacility" class="table table-success ">
     <thead>
     <tr>
         <th scope="col">Số thứ tự</th>
@@ -46,7 +48,7 @@
         <th scope="col">Dịch vụ miễn phí</th>
         <th scope="col">Kiểu thuê</th>
         <th scope="col">Loại dịch vụ</th>
-        <th scope="col">Cập nhật</th>
+        <th scope="col">Chỉnh sửa</th>
         <th scope="col">Xóa</th>
     </tr>
     </thead>
@@ -68,7 +70,7 @@
             <td>${fac.getRentalTypeName()}</td>
             <td>${fac.getFacilityTypeName()}</td>
             <td>
-                <button class="btn btn-success">C.Nhật</button>
+                <a href="/facility?action=edit&id=${fac.getId()}"><button class="btn btn-success">C.Sửa</button></a>
             </td>
             <td>
                 <button onclick="passInfo('${fac.getId()}','${fac.getName()}')" class="btn btn-danger"
@@ -119,6 +121,18 @@
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
         crossorigin="anonymous">
 </script>
+<script src="jquery/jquery-3.5.1.min.js"></script>
+<script src="datatables/js/jquery.dataTables.min.js"></script>
+<script src="datatables/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tableFacility').dataTable( {
+            "dom": 'lrtip',
+            "lengthChange": false,
+            "pageLength": 5
+        } );
+    } );
+</script>
 </body>
 <script>
     function passInfo(id, name) {
@@ -126,4 +140,5 @@
         document.getElementById("facName").innerText = name;
     }
 </script>
+
 </html>
