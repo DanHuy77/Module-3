@@ -21,8 +21,6 @@
 
 <button type="button" style="float: right" class="btn btn-primary" data-bs-toggle="modal"
         data-bs-target="#add">Thêm mới khách hàng
-
-
 </button>
 
 <table class="table table-success">
